@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelTriviaDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelTriviaDBStoreContainer">
+    <EntitySet Name="CompanySet" EntityType="ModelTriviaDB.Store.CompanySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeSet" EntityType="ModelTriviaDB.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GameSet" EntityType="ModelTriviaDB.Store.GameSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeGameSet" EntityType="ModelTriviaDB.Store.EmployeeGameSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AnswerSet" EntityType="ModelTriviaDB.Store.AnswerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OptionSet" EntityType="ModelTriviaDB.Store.OptionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QuestionSet" EntityType="ModelTriviaDB.Store.QuestionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategorySet" EntityType="ModelTriviaDB.Store.CategorySet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CompanyEmployee" Association="ModelTriviaDB.Store.CompanyEmployee">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Employee" EntitySet="EmployeeSet" />
+    </AssociationSet>
+    <AssociationSet Name="GameEmployeGame" Association="ModelTriviaDB.Store.GameEmployeGame">
+      <End Role="Game" EntitySet="GameSet" />
+      <End Role="EmployeGame" EntitySet="EmployeeGameSet" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeEmployeGame" Association="ModelTriviaDB.Store.EmployeeEmployeGame">
+      <End Role="Employee" EntitySet="EmployeeSet" />
+      <End Role="EmployeGame" EntitySet="EmployeeGameSet" />
+    </AssociationSet>
+    <AssociationSet Name="OptionAnswer" Association="ModelTriviaDB.Store.OptionAnswer">
+      <End Role="Option" EntitySet="OptionSet" />
+      <End Role="Answer" EntitySet="AnswerSet" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionOption" Association="ModelTriviaDB.Store.QuestionOption">
+      <End Role="Question" EntitySet="QuestionSet" />
+      <End Role="Option" EntitySet="OptionSet" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeGameAnswer" Association="ModelTriviaDB.Store.EmployeGameAnswer">
+      <End Role="EmployeGame" EntitySet="EmployeeGameSet" />
+      <End Role="Answer" EntitySet="AnswerSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategoryQuestion" Association="ModelTriviaDB.Store.CategoryQuestion">
+      <End Role="Category" EntitySet="CategorySet" />
+      <End Role="Question" EntitySet="QuestionSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CompanySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cellphone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GameSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeGameSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AnswerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeGameId" Type="int" Nullable="false" />
+    <Property Name="OptionId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Nullable="false" />
+    <Property Name="State" Type="bit" Nullable="false" />
+    <Property Name="EmployeGame_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OptionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuestionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="decimal" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategorySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CompanyEmployee">
+    <End Role="Company" Type="ModelTriviaDB.Store.CompanySet" Multiplicity="1" />
+    <End Role="Employee" Type="ModelTriviaDB.Store.EmployeeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GameEmployeGame">
+    <End Role="Game" Type="ModelTriviaDB.Store.GameSet" Multiplicity="1" />
+    <End Role="EmployeGame" Type="ModelTriviaDB.Store.EmployeeGameSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeGame">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeEmployeGame">
+    <End Role="Employee" Type="ModelTriviaDB.Store.EmployeeSet" Multiplicity="1" />
+    <End Role="EmployeGame" Type="ModelTriviaDB.Store.EmployeeGameSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeGame">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OptionAnswer">
+    <End Role="Option" Type="ModelTriviaDB.Store.OptionSet" Multiplicity="1" />
+    <End Role="Answer" Type="ModelTriviaDB.Store.AnswerSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Option">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answer">
+        <PropertyRef Name="OptionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="QuestionOption">
+    <End Role="Question" Type="ModelTriviaDB.Store.QuestionSet" Multiplicity="1" />
+    <End Role="Option" Type="ModelTriviaDB.Store.OptionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Option">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeGameAnswer">
+    <End Role="EmployeGame" Type="ModelTriviaDB.Store.EmployeeGameSet" Multiplicity="1" />
+    <End Role="Answer" Type="ModelTriviaDB.Store.AnswerSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeGame">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answer">
+        <PropertyRef Name="EmployeGame_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoryQuestion">
+    <End Role="Category" Type="ModelTriviaDB.Store.CategorySet" Multiplicity="1" />
+    <End Role="Question" Type="ModelTriviaDB.Store.QuestionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModelTriviaDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelTriviaDBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompanySet" EntityType="ModelTriviaDB.Company" />
+          <EntitySet Name="EmployeeSet" EntityType="ModelTriviaDB.Employee" />
+          <EntitySet Name="GameSet" EntityType="ModelTriviaDB.Game" />
+          <AssociationSet Name="CompanyEmployee" Association="ModelTriviaDB.CompanyEmployee">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Employee" EntitySet="EmployeeSet" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeGameSet" EntityType="ModelTriviaDB.EmployeeGame" />
+          <AssociationSet Name="GameEmployeGame" Association="ModelTriviaDB.GameEmployeGame">
+            <End EntitySet="GameSet" Role="Game" />
+            <End EntitySet="EmployeeGameSet" Role="EmployeGame" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeEmployeGame" Association="ModelTriviaDB.EmployeeEmployeGame">
+            <End Role="Employee" EntitySet="EmployeeSet" />
+            <End Role="EmployeGame" EntitySet="EmployeeGameSet" />
+          </AssociationSet>
+          <EntitySet Name="AnswerSet" EntityType="ModelTriviaDB.Answer" />
+          <EntitySet Name="OptionSet" EntityType="ModelTriviaDB.Option" />
+          <AssociationSet Name="OptionAnswer" Association="ModelTriviaDB.OptionAnswer">
+            <End Role="Option" EntitySet="OptionSet" />
+            <End Role="Answer" EntitySet="AnswerSet" />
+          </AssociationSet>
+          <EntitySet Name="QuestionSet" EntityType="ModelTriviaDB.Question" />
+          <EntitySet Name="CategorySet" EntityType="ModelTriviaDB.Category" />
+          <AssociationSet Name="QuestionOption" Association="ModelTriviaDB.QuestionOption">
+            <End Role="Question" EntitySet="QuestionSet" />
+            <End Role="Option" EntitySet="OptionSet" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeGameAnswer" Association="ModelTriviaDB.EmployeGameAnswer">
+            <End Role="EmployeGame" EntitySet="EmployeeGameSet" />
+            <End Role="Answer" EntitySet="AnswerSet" />
+          </AssociationSet>
+          <AssociationSet Name="CategoryQuestion" Association="ModelTriviaDB.CategoryQuestion">
+            <End Role="Category" EntitySet="CategorySet" />
+            <End Role="Question" EntitySet="QuestionSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="ModelTriviaDB.CompanyEmployee" FromRole="Company" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" />
+          <Property Name="Cellphone" Type="String" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="ModelTriviaDB.CompanyEmployee" FromRole="Employee" ToRole="Company" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmployeGame" Relationship="ModelTriviaDB.EmployeeEmployeGame" FromRole="Employee" ToRole="EmployeGame" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EmployeGame" Relationship="ModelTriviaDB.GameEmployeGame" FromRole="Game" ToRole="EmployeGame" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="CompanyEmployee">
+          <End Type="ModelTriviaDB.Company" Role="Company" Multiplicity="1" />
+          <End Type="ModelTriviaDB.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeGame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Game" Relationship="ModelTriviaDB.GameEmployeGame" FromRole="EmployeGame" ToRole="Game" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="ModelTriviaDB.EmployeeEmployeGame" FromRole="EmployeGame" ToRole="Employee" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="ModelTriviaDB.EmployeGameAnswer" FromRole="EmployeGame" ToRole="Answer" />
+        </EntityType>
+        <Association Name="GameEmployeGame">
+          <End Type="ModelTriviaDB.Game" Multiplicity="1" Role="Game" />
+          <End Type="ModelTriviaDB.EmployeeGame" Multiplicity="*" Role="EmployeGame" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeEmployeGame">
+          <End Type="ModelTriviaDB.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ModelTriviaDB.EmployeeGame" Role="EmployeGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeGame">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeGameId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="ModelTriviaDB.OptionAnswer" FromRole="Answer" ToRole="Option" />
+          <Property Name="OptionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmployeGame" Relationship="ModelTriviaDB.EmployeGameAnswer" FromRole="Answer" ToRole="EmployeGame" />
+          <Property Name="Value" Type="Decimal" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Option">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="ModelTriviaDB.OptionAnswer" FromRole="Option" ToRole="Answer" />
+          <NavigationProperty Name="Question" Relationship="ModelTriviaDB.QuestionOption" FromRole="Option" ToRole="Question" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="OptionAnswer">
+          <End Type="ModelTriviaDB.Option" Role="Option" Multiplicity="1" />
+          <End Type="ModelTriviaDB.Answer" Role="Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Option">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="OptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="ModelTriviaDB.QuestionOption" FromRole="Question" ToRole="Option" />
+          <Property Name="Value" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="ModelTriviaDB.CategoryQuestion" FromRole="Question" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="ModelTriviaDB.CategoryQuestion" FromRole="Category" ToRole="Question" />
+        </EntityType>
+        <Association Name="QuestionOption">
+          <End Type="ModelTriviaDB.Question" Role="Question" Multiplicity="1" />
+          <End Type="ModelTriviaDB.Option" Role="Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeGameAnswer">
+          <End Type="ModelTriviaDB.EmployeeGame" Role="EmployeGame" Multiplicity="1" />
+          <End Type="ModelTriviaDB.Answer" Role="Answer" Multiplicity="*" />
+        </Association>
+        <Association Name="CategoryQuestion">
+          <End Type="ModelTriviaDB.Category" Role="Category" Multiplicity="1" />
+          <End Type="ModelTriviaDB.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelTriviaDBStoreContainer" CdmEntityContainer="ModelTriviaDBContainer">
+    <EntitySetMapping Name="CompanySet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.Company)">
+        <MappingFragment StoreEntitySet="CompanySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.Employee)">
+        <MappingFragment StoreEntitySet="EmployeeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.Game)">
+        <MappingFragment StoreEntitySet="GameSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeGameSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.EmployeeGame)">
+        <MappingFragment StoreEntitySet="EmployeeGameSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnswerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.Answer)">
+        <MappingFragment StoreEntitySet="AnswerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeGameId" ColumnName="EmployeGameId" />
+          <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OptionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.Option)">
+        <MappingFragment StoreEntitySet="OptionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.Question)">
+        <MappingFragment StoreEntitySet="QuestionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategorySet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelTriviaDB.Category)">
+        <MappingFragment StoreEntitySet="CategorySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EmployeGameAnswer" TypeName="ModelTriviaDB.EmployeGameAnswer" StoreEntitySet="AnswerSet">
+      <EndProperty Name="EmployeGame">
+        <ScalarProperty Name="Id" ColumnName="EmployeGame_Id" />
+      </EndProperty>
+      <EndProperty Name="Answer">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

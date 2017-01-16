@@ -1,0 +1,127 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="form-inline text-center" role="form">
+            <div class="form-group">
+                <!--Autor: Lenin - Select desde una array-->
+                <select id="idPagination" ng-change="changeAction()" ng-model="pageSize" class="form-control"
+                        ng-options="item as item for item in pageSizes"></select> -
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="search" placeholder="Buscar..."
+                       ng-change="currentPage=0" ng-model="searchComplete" /> -
+            </div>
+            <div class="form-group">
+                Pagina Numero: {{currentPage +1}} -
+            </div>
+            <div class="form-group">
+                Pagina Totales: {{pageNumber}} -
+            </div>
+            <div class="form-group">
+                Numero de Elementos: {{numberElements}} -
+            </div>
+            <div class="form-group">
+                Lista Categorias
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center"><a ng-click="boolId=ordering(boolId,'Id')">Id</a></th>
+                        <th class="text-center"><a ng-click="boolName=ordering(boolName,'Name')">Nombre</a></th>
+                        <th class="text-center"><a ng-click="boolDescription=ordering(boolDescription,'Description')">Descripcion</a></th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td>
+                            -
+                        </td>
+                        <td>
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <input class="form-control" type="text" ng-model="categoryInsert.Name" placeholder="Nombre" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <input class="form-control" type="text" ng-model="categoryInsert.Description" placeholder="Descripcion" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-inline">
+                                <div class="btn-group form-group">
+                                    <button type="button" class="btn btn-primary" ng-click="InsertCategory(categoryInsert)">Registrar</button>
+                                    <button type="button" class="btn btn-default" ng-click="CleanCategoryInsert()">Limpiar</button>
+                                </div>
+                                <div class="form-group">
+                                    <label class="label label-{{categoryInsert.styleInsert}}">{{categoryInsert.stateInsert}}</label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="item in (result=category | orderBy: ord: ordStatus | filter:search)"
+                        ng-if="$index >= (currentPage * pageSize) &&  $index<((currentPage+1)*pageSize)">
+                        <td>
+                            <div ng-if="!item.stateUpdate">
+                                {{item.Id}}
+                            </div>
+                            <div ng-if="item.stateUpdate">
+                                {{item.Id}}
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="!item.stateUpdate">
+                                {{item.Name}}
+                            </div>
+                            <div class="col-xs-6 col-xs-offset-3" ng-if="item.stateUpdate">
+                                <input type="text" class="form-control text-center" ng-model="item.Name" />
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="!item.stateUpdate">
+                                {{item.Description}}
+                            </div>
+                            <div class="col-xs-6 col-xs-offset-3" ng-if="item.stateUpdate">
+                                <input type="text" class="form-control text-center" ng-model="item.Description" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-inline">
+                                <!-- Single button -->
+                                <div class="btn-group form-group" ng-if="!item.stateUpdate">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a data-toggle="modal" ng-click="loadPerson(item)" data-target="#myModalDetail">Detalles</a></li>
+                                        <li><a data-toggle="modal" ng-click="item.stateUpdate = true" data-target="#myModalUpdate">Actualizar</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a ng-click="deletePerson(item)">Eliminar</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group form-group" ng-if="item.stateUpdate">
+                                    <button type="button" class="btn btn-primary" ng-click="updatePerson(item)">Guardar</button>
+                                    <button type="button" class="btn btn-default" ng-click="cleanPersonUpdate(item)">Salir</button>
+                                </div>
+                                <div class="form-group" ng-if="item.stateUpdate">
+                                    <label class="label label-{{item.styleUpdateMessage}}">{{item.stateUpdateMessage}}</label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" ng-click="currentPage = 0">Inicio</button>
+                <button type="button" class="btn btn-default" ng-click="paging(0)">Anterior</button>
+                <button type="button" class="btn btn-default" ng-click="paging(1)">Siguiente</button>
+                <button type="button" class="btn btn-default" ng-click="currentPage=pageNumber-1">Fin</button>
+            </div>
+        </div>
+    </div>
+</div>

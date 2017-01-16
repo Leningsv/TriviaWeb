@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3210d8292d6f47a9b7d8b0e02f2fbfa0" Name="Diagram1" ZoomLevel="71" >
+        <EntityTypeShape EntityType="ModelTriviaDB.Company" Width="1.5" PointX="3.625" PointY="1.25" />
+        <EntityTypeShape EntityType="ModelTriviaDB.Employee" Width="1.5" PointX="6" PointY="1" />
+        <EntityTypeShape EntityType="ModelTriviaDB.Game" Width="1.5" PointX="7" PointY="5.25" />
+        <AssociationConnector Association="ModelTriviaDB.CompanyEmployee" />
+        <EntityTypeShape EntityType="ModelTriviaDB.EmployeeGame" Width="1.5" PointX="9.625" PointY="3.375" />
+        <AssociationConnector Association="ModelTriviaDB.GameEmployeGame" />
+        <AssociationConnector Association="ModelTriviaDB.EmployeeEmployeGame" />
+        <EntityTypeShape EntityType="ModelTriviaDB.Answer" Width="1.5" PointX="12.625" PointY="3.375" />
+        <EntityTypeShape EntityType="ModelTriviaDB.Option" Width="1.5" PointX="12.625" PointY="0.625" />
+        <AssociationConnector Association="ModelTriviaDB.OptionAnswer" />
+        <EntityTypeShape EntityType="ModelTriviaDB.Question" Width="1.5" PointX="10.375" PointY="0.625" />
+        <EntityTypeShape EntityType="ModelTriviaDB.Category" Width="1.5" PointX="8.125" PointY="0.625" />
+        <AssociationConnector Association="ModelTriviaDB.QuestionOption" />
+        <AssociationConnector Association="ModelTriviaDB.EmployeGameAnswer" />
+        <AssociationConnector Association="ModelTriviaDB.CategoryQuestion" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
